@@ -49,6 +49,9 @@ li::marker{
     text-decoration: none;
     font-family: Arial, Helvetica, sans-serif;
     font-size: large;
-    
+}
+
+a{
+    text-decoration: none;
 }
 
