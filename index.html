@@ -13,15 +13,49 @@
 
     <center>
         <h1>Logic Games</h1>
-        <nav class='bar'>
-            <ul> <!--in hrfes there has to be the route to the location where the 
-                server serves the html file that youo whant to access-->
-                <li class = 'game'><a href="/LogicGames/SkyScrapers" class = 'game'>Skyscrapers</a></li>
-                <li class = 'game'><a href="/LogicGames/BattleShip" class = 'game'>Battleship</a></li>
-                <li class = 'game'><a href="" class = 'game'>Chiocciola</a></li>
-            </ul>
-        </nav>
     </center>
+
+    <script>
+
+        async function go_with_fetch(){
+
+            const options = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    request: 'request to select'
+                })
+            };
+
+            //sends the body of options to the endpoint '/api'
+            console.log(window.location.href + '/select');
+            const response = await fetch(window.location.href + '/select', options);
+            //fetch returns the server response to the post
+            const json = await response.json();
+
+            if (json.status == 'success') {
+                user = json.user
+                document.body.innerHTML += 
+                `<center id = "selectors">
+                <ul>
+                    <li class='game'><a href='/LogicGames/${user}/SkyScrapers' id="link">Skyscrapers</a></li>
+                    <li class='game'><a href='/LogicGames/${user}/BattleShip' id="link">BattleShip</a></li>
+                    <li class='game'><a href='/LogicGames/${user}/Chiocciola' id="link">Chiocciola</a></li>
+                </ul>
+                </center>`;
+
+            }
+            else {
+                console.log('error');
+            }
+        }
+
+        go_with_fetch()            
+
+    </script>
+
 
 </body>
 
